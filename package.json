@@ -1,0 +1,22 @@
+{
+  "name": "lothernbot",
+  "version": "0.5.0",
+  "description": "A personal discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "js"
+  ],
+  "author": "Victor0596647",
+  "license": "MIT",
+  "dependencies": {
+    "discord": "^0.8.2",
+    "discord.js": "^14.7.1"
+  }
+}
