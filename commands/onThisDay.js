@@ -26,9 +26,10 @@ module.exports = {
          */
         const getOnThisDay = async (date) =>
         {
+            console.log("Fecthing...");
             var dataEmbed = await getapi(`${api_url}/${date.getMonth()+1}/${date.getDate()}`)
             .then(dateInfo => {
-                //console.log(dateInfo);
+                console.log(dateInfo);
                 const otdEmbed = {
                     color: resolveColor('Random'),
                     title: `On This Day ${dateInfo.date.split("_").join(" ")}`,
@@ -92,20 +93,56 @@ module.exports = {
         if(args.length == 0)
         {
             const curDate = new Date();
-            message.channel.sendTyping().then( () => {
-                getOnThisDay(curDate).then(data => {message.channel.send({embeds: [data]})}, reason => {message.channel.send("There was an error, try again later."); console.error(reason);});
+            message.channel.sendTyping().then( async () => {
+                await getOnThisDay(curDate).then(data => {message.channel.send({embeds: [data]})}, reason => {message.channel.send("There was an error, try again later."); console.error(reason);});
             });
         } else if(args.length > 0) {
             if(args.includes(variables[2]) && !args.includes(variables[1])){
                 message.reply("You need to specify the event type before using 'select'");
                 return; 
-            }
-            if(args.includes(variables[2]) && args.includes(variables[1])){
+            } else if(args.includes(variables[2]) && args.includes(variables[1])){
+
+            } else if(args.includes(variables[1])) {
 
             }
+
             if(args.includes(variables[0]))
             {
-                //console.log(args.splice(args.indexOf(variables[0]), args.indexOf("]")));
+                var on = args.slice(args.indexOf("[", args.indexOf(variables[0])), args.indexOf("]", variables[0])+1).join("").replace(" ", "");
+                console.log(on);
+                if(on.includes("[") && on.includes("]"))
+                {
+                    on = on.replace("[", "").replace("]", "");
+                    const months = {
+                        jan: 0,
+                        feb: 1,
+                        mar: 2,
+                        apr: 3,
+                        may: 4,
+                        jun: 5,
+                        jul: 6,
+                        aug: 7,
+                        sep: 8,
+                        oct: 9,
+                        nov: 10,
+                        dec: 11
+                    };
+
+                    const month = on.substring(0, on.indexOf(","));
+                    const day = on.substring(on.indexOf(",")+1);
+                    console.log("selected month:" + month + " selected day:" + day);
+                    if(months[month] == undefined)
+                    {
+                        message.reply("Please make sure that the month selected is 3 letters long and a valid month");
+                        return;
+                    }
+                    message.channel.sendTyping().then(async () => {
+                        await getOnThisDay(new Date(2024, months[month], Number(day))).then(data => {message.channel.send({embeds: [data]})}, reason => {message.channel.send("There was an error, try again later."); console.error(reason);});
+                    })
+                }else {
+                    message.reply("When specifying the month and date, you need to include '[' at the front and ']' at the end of the args. Check" + inlineCode("help otd") + "for reference.");
+                    return;
+                }
             }
         }
     },
