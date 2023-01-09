@@ -1,13 +1,13 @@
 const fs = require(`fs`);
 const {Client, Events, GatewayIntentBits, Collection} = require('discord.js');
-const { env } = require(`process.env`);
 const { bot } = require(`./config.json`);
 
 //Client Initialization
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildMessageReactions]
 });
-client.token = env['bot-token'];
+
+client.token = process.env['bot-token'];
 client.prefix = bot.prefix;
 
 client.commandCol = new Collection();
