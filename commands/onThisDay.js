@@ -108,25 +108,25 @@ module.exports = {
 
             if(args.includes(variables[0]))
             {
+                const months = {
+                    jan: 0,
+                    feb: 1,
+                    mar: 2,
+                    apr: 3,
+                    may: 4,
+                    jun: 5,
+                    jul: 6,
+                    aug: 7,
+                    sep: 8,
+                    oct: 9,
+                    nov: 10,
+                    dec: 11
+                };
                 var on = args.slice(args.indexOf("[", args.indexOf(variables[0])), args.indexOf("]", variables[0])+1).join("").replace(" ", "");
                 console.log(on);
                 if(on.includes("[") && on.includes("]"))
                 {
                     on = on.replace("[", "").replace("]", "");
-                    const months = {
-                        jan: 0,
-                        feb: 1,
-                        mar: 2,
-                        apr: 3,
-                        may: 4,
-                        jun: 5,
-                        jul: 6,
-                        aug: 7,
-                        sep: 8,
-                        oct: 9,
-                        nov: 10,
-                        dec: 11
-                    };
 
                     const month = on.substring(0, on.indexOf(","));
                     const day = on.substring(on.indexOf(",")+1);
