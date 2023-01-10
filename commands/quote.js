@@ -1,4 +1,5 @@
 const { Message, Client, resolveColor, userMention, inlineCode } = require('discord.js');
+import fetch from 'node-fetch';
 
 async function getapi(url)
 {
