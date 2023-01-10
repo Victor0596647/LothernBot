@@ -8,6 +8,7 @@ const client = new Client({
 });
 
 client.token = process.env['bot-token'];
+console.log(process.env['bot-token']);
 client.prefix = bot.prefix;
 
 client.commandCol = new Collection();
