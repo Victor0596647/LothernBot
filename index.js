@@ -7,8 +7,8 @@ const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildMessageReactions]
 });
 
-client.token = process.env['bot-token'];
-console.log(process.env['bot-token']);
+client.token = process.env.botToken;
+console.log(process.env.botToken);
 client.prefix = bot.prefix;
 
 client.commandCol = new Collection();
